@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Valentine?</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    background: linear-gradient(180deg, #5fb38a, #9ad9c2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Main card */
+.court {
+    background: linear-gradient(180deg, #7fcfa3, #6bbf8a);
+    border: 3px solid white;
+    width: 90%;
+    max-width: 360px;
+    padding: 20px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 12px 25px rgba(0,0,0,0.2);
+}
+
+/* Tennis animation */
+.animation {
+    height: 80px;
+    position: relative;
+    margin-bottom: 10px;
+}
+
+.racket {
+    width: 30px;
+    height: 40px;
+    border: 3px solid #2f2f2f;
+    border-radius: 50%;
+    position: absolute;
+    left: 42%;
+    top: 8px;
+}
+
+.handle {
+    width: 6px;
+    height: 22px;
+    background: #2f2f2f;
+    position: absolute;
+    left: 48%;
+    top: 48px;
+}
+
+.ball {
+    width: 10px;
+    height: 10px;
+    background: #f7ff6b;
+    border-radius: 50%;
+    position: absolute;
+    left: 15%;
+    top: 36px;
+    animation: rally 3.8s ease-in-out infinite;
+}
+
+@keyframes rally {
+    0%   { transform: translateX(0); }
+    50%  { transform: translateX(130px); }
+    100% { transform: translateX(0); }
+}
+
+/* Text */
+h1 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+p {
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+/* Net divider */
+.net {
+    height: 2px;
+    background: white;
+    margin: 20px 0;
+}
+
+/* Buttons */
+.buttons {
+    margin-top: 20px;
+    position: relative;
+    height: 60px;
+}
+
+button {
+    padding: 10px 16px;
+    font-size: 14px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    margin: 6px;
+    background: #ffffff;
+}
+
+/* Dodging no */
+#no {
+    position: absolute;
+    right: 20px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="court" id="screen">
+
+    <!-- Tennis animation -->
+    <div class="animation">
+        <div class="racket"></div>
+        <div class="handle"></div>
+        <div class="ball"></div>
+    </div>
+
+    <h1>Hey Pahel</h1>
+
+    <p><b>
+        I don’t usually say things like this,<br>
+        but your presence genuinely matters to me.
+        <br><br>
+        Would you like to go on a date<br>
+        and be my Valentine?
+   </b></p>
+
+    <div class="net"></div>
+
+    <div class="buttons">
+        <button id="yes">Yes</button>
+        <button id="no">No</button>
+    </div>
+</div>
+
+<!-- AUDIO -->
+<audio id="song" preload="auto">
+    <source src="saturn_clip.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+const noBtn = document.getElementById("no");
+const yesBtn = document.getElementById("yes");
+const screen = document.getElementById("screen");
+const song = document.getElementById("song");
+
+/* Dodge No button */
+noBtn.addEventListener("mouseenter", () => {
+    const x = Math.random() * 120 - 60;
+    const y = Math.random() * 30 - 15;
+    noBtn.style.transform = `translate(${x}px, ${y}px)`;
+});
+
+noBtn.addEventListener("click", () => {
+    alert("Idiot I am yours if u still deny the fact(now click yes) 👎");
+});
+
+/* Play song safely (iPhone compatible) */
+function playSong() {
+    song.currentTime = 0;
+    song.volume = 0.35;
+    song.loop = true;
+
+    song.play().catch(() => {
+        alert("Tap once more to enable sound 🎵");
+    });
+}
+
+/* YES click */
+yesBtn.addEventListener("click", () => {
+    playSong();
+
+    screen.innerHTML = `
+        <h1>Nice choice Babygirl🥰</h1>
+        <p>Where would you like to go on our date?</p>
+
+        <button onclick="confirmDate()">🎬 Movie date</button>
+        <button onclick="confirmDate()">🕹️ Arcade date</button>
+        <button onclick="confirmDate()">🧱 Lego date</button>
+        <button onclick="confirmDate()">📞 Tell me on call</button>
+    `;
+});
+
+/* Final screen */
+function confirmDate() {
+    screen.innerHTML = `
+        <h1>Date confirmed </h1>
+        <p>
+            14th February ❤️<br><br>
+            I love you.<br>
+            Thanks for being by my side,<br>
+            My Pahel
+        </p>
+    `;
+}
+</script>
+
+</body>
+</html>
